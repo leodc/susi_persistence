@@ -1,0 +1,53 @@
+####
+# El siguiente archivo fue creado para un workspace en c9
+####
+
+# Activamos el servicio de postgresql
+sudo service postgresql start
+
+
+# Instalamos postgis
+sudo sudo apt-get install postgresql-9.3-postgis-2.1
+
+
+# Entramos a la herramienta de psql
+sudo sudo -u postgres psql
+
+
+# OPCIONAL: Establecer la contraseña de postgresql
+\password postgresql    # root
+
+
+# Creamos una nueva base de datos y nos conectamos a ella
+create database "municipios";
+\c municipios;
+
+
+# Activamos postgis
+CREATE EXTENSION postgis;
+
+
+# Ejecutamos el siguiente comando para crear la nueva tabla y la información geografica
+\ir SQL_FILE
+\ir utils/municipios.sql
+
+
+#################################################
+#               La base esta lista              #
+#################################################
+
+# Agregar las funcionalidades necesarias a la tabla
+-- Enable Topology
+CREATE EXTENSION postgis_topology;
+-- Enable PostGIS Advanced 3D 
+-- and other geoprocessing algorithms
+-- sfcgal not available with all distributions
+CREATE EXTENSION postgis_sfcgal;
+-- fuzzy matching needed for Tiger
+CREATE EXTENSION fuzzystrmatch;
+-- rule based standardizer
+CREATE EXTENSION address_standardizer;
+-- example rule data set
+CREATE EXTENSION address_standardizer_data_us;
+-- Enable US Tiger Geocoder
+CREATE EXTENSION postgis_tiger_geocoder;

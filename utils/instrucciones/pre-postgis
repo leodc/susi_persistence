@@ -1,0 +1,12 @@
+
+# Preparación de la base de datos
+# 
+# Descargamos las geometrias desde la pagina: 
+#   *Poligonos de localicades urbanas http://www.inegi.org.mx/geo/contenidos/geoestadistica/m_g_0.aspx
+#   *Las localidades urbanas son aquellas que poseen dos mil quinientos o más habitantes, o bien, si es cabecera municipal
+#  
+# Descomprimimos los archivos, subimos a c9 y usamos el comando:
+#   
+#                           shp2pgsql -s 4326  -I SHP_FILE schema.TABLE > utils/municipios.sql
+#                           shp2pgsql -s 4326  -I utils/instrucciones/mglu2014v6_2/mglu2013v6_2.shp public.municipios > utils/municipios.sql 
+# 

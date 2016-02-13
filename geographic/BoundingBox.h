@@ -1,5 +1,5 @@
 #include <iostream>
-#include "coords.h"
+#include "Coords.h"
 
 #ifndef _GEOGRAPHIC_BOUNDINGBOX_H_
     #define _GEOGRAPHIC_BOUNDINGBOX_H_

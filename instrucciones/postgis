@@ -1,0 +1,33 @@
+
+#activamos el servicio en el workspace de c9
+sudo service postgresql start
+
+#instalamos postgis
+sudo sudo apt-get install postgresql-9.3-postgis-2.1
+
+#entramos a la herramienta de psql
+sudo sudo -u postgres psql
+
+#creamos la base de datos
+create database "municipios";
+\c municipios;
+
+
+##Activar postgis en la base de datos actual
+CREATE EXTENSION postgis;
+
+##Agregar las funcionalidades necesarias
+-- Enable Topology
+CREATE EXTENSION postgis_topology;
+-- Enable PostGIS Advanced 3D 
+-- and other geoprocessing algorithms
+-- sfcgal not available with all distributions
+CREATE EXTENSION postgis_sfcgal;
+-- fuzzy matching needed for Tiger
+CREATE EXTENSION fuzzystrmatch;
+-- rule based standardizer
+CREATE EXTENSION address_standardizer;
+-- example rule data set
+CREATE EXTENSION address_standardizer_data_us;
+-- Enable US Tiger Geocoder
+CREATE EXTENSION postgis_tiger_geocoder;

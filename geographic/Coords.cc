@@ -1,4 +1,4 @@
-#include "coords.h"
+#include "Coords.h"
 
 
 Coords::Coords(double lat, double lng){

@@ -1,4 +1,4 @@
-#include "boundingBox.h"
+#include "BoundingBox.h"
 
 
 BoundingBox::BoundingBox(Coords left_top, Coords right_bottom){
@@ -14,9 +14,13 @@ int BoundingBox::buildBox(){
     
     //Esquina inferior izquierda
     left_bottom.setLat( left_top.getLat() );
-    left_bottom.setLng(  )
+    left_bottom.setLng( right_bottom.getLng() );
 }
+
 
 void BoundingBox::print(){
     left_top.print();
+    right_top.print();
+    right_bottom.print();
+    left_bottom.print();
 }

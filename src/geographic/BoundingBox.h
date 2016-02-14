@@ -10,6 +10,7 @@
         
         public:
             BoundingBox(Coords,Coords);
+            BoundingBox(Coords,Coords,Coords,Coords);
             void print();
             int buildBox();
     };

@@ -1,11 +1,9 @@
 #include "GeoPolygon.h"
 
 
-GeoPolygon::GeoPolygon(){
-    srid = 0;
-}
+GeoPolygon::GeoPolygon(){}
 
-GeoPolygon::GeoPolygon(int count_vertices, int srid){
+GeoPolygon::GeoPolygon(int count_vertices, std::string srid){
     this->count_vertices = count_vertices;
     this->srid = srid;
     
@@ -13,7 +11,7 @@ GeoPolygon::GeoPolygon(int count_vertices, int srid){
 }
 
 
-GeoPolygon::GeoPolygon(std::string text, int srid){
+GeoPolygon::GeoPolygon(std::string text, std::string srid){
     this->text = text;
     this->srid = srid;
 }

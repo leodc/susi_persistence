@@ -1,5 +1,6 @@
 #include <iostream>
 #include <pqxx/pqxx>
+#include <vector>
 
 #include "postgis.h"
 #include "../geographic/GeoPolygon.h"
@@ -15,5 +16,7 @@ using namespace pqxx;
     class PostgisFunctions{
         public:
             static GeoPolygon getBounds(GeoPoint, GeoPoint);
+            static std::vector<GeoPolygon> getPolygonsContained(GeoPolygon);
+            static std::string getTableSrid(std::string, std::string);
     };
 #endif

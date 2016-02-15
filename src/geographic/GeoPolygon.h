@@ -9,25 +9,25 @@
     class GeoPolygon{
         Coords *coords;
         
-        int srid;
+        std::string srid;
         int count_vertices;
         
         std::string text;
         
         public:
             GeoPolygon();
-            GeoPolygon(int, int srid = 4326);
-            GeoPolygon(std::string, int srid = 4326);
+            GeoPolygon(int, std::string srid = "4326");
+            GeoPolygon(std::string, std::string srid = "4326");
             
             Coords * getCoords(){
                 return coords;
             }
             
-            void setSrid(int srid){
+            void setSrid(std::string srid){
                 this->srid = srid;
             }
             
-            int getSrid(){
+            std::string getSrid(){
                 return srid;
             }
             

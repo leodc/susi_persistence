@@ -11,11 +11,11 @@
 
     class GeoPoint{
         Coords coords;
-        int srid;
+        std::string srid;
         
         public:
-            GeoPoint(Coords, int srid=4326);
-            GeoPoint(double, double, int srid=4326);
+            GeoPoint(Coords, std::string srid="4326");
+            GeoPoint(double, double, std::string srid="4326");
             std::string asText();
             
             void setCoords(Coords coords){
@@ -24,6 +24,22 @@
             
             Coords getCoords(){
                 return coords;
+            }
+            
+            double getLat(){
+                return coords.getLat();
+            }
+            
+            double getLng(){
+                return coords.getLng();
+            }
+            
+            void setSrid(std::string srid){
+                this->srid = srid;
+            }
+            
+            std::string getSrid(){
+                return srid;
             }
     };
 

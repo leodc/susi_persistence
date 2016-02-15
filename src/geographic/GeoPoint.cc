@@ -1,11 +1,11 @@
 #include "GeoPoint.h"
 
-GeoPoint::GeoPoint(Coords coords, int srid){
+GeoPoint::GeoPoint(Coords coords, std::string srid){
     this->coords = coords;
     this->srid = srid;
 }
 
-GeoPoint::GeoPoint(double lat, double lng, int srid){
+GeoPoint::GeoPoint(double lat, double lng, std::string srid){
     coords.setLat(lat);
     coords.setLng(lng);
     this->srid = srid;

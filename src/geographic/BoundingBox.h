@@ -12,6 +12,37 @@
             BoundingBox(Coords,Coords);
             BoundingBox(Coords,Coords,Coords,Coords);
             void print();
-            int buildBox();
+            
+            void setLeftTop(Coords coords){
+                left_top = coords;
+            }
+            
+            Coords getLeftTop(){
+                return left_top;
+            }
+            
+            void setLeftBottom(Coords coords){
+                left_bottom = coords;
+            }
+            
+            Coords getLeftBottom(){
+                return left_bottom;
+            }
+            
+            void setRightTop(Coords coords){
+                right_top = coords;
+            }
+            
+            Coords getRightTop(){
+                return right_top;
+            }
+            
+            void setRightBottom(Coords coords){
+                right_bottom = coords;
+            }
+            
+            Coords getRightBottom(){
+                return right_bottom;
+            }
     };
 #endif

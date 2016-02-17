@@ -1,9 +1,12 @@
+#include <string>
 
-#ifndef _POSTGIS_ENTITY_MUNICIPIOS_H_
+#include "../../geographic/GeoPolygon.h"
+
+#ifndef _POSTGIS_ENTITY_MUNICIPIO_H_
     
-    #define _POSTGIS_ENTITY_MUNICIPIOS_H_
+    #define _POSTGIS_ENTITY_MUNICIPIO_H_
     
-    class Municipios{
+    class Municipio{
         GeoPolygon geometry;
         std::string entidad;
         std::string municipio;

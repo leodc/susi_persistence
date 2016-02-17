@@ -8,7 +8,7 @@ POSTGIS_LIBRARY=-lpqxx -lpq
 
 #	FILES
 OBJS_GEPGRAPHIC=src/geographic/Coords.cc src/geographic/BoundingBox.cc tests/geographic_main.cc
-OBJS_POSTGIS=src/postgis/postgis.h src/postgis/PostgisFunctions.cc src/geographic/GeoPoint.cc src/geographic/GeoPolygon.cc src/geographic/Coords.cc tests/postgis_main.cc
+OBJS_POSTGIS=src/postgis/postgis.h src/postgis/PostgisFunctions.cc src/geographic/GeoPoint.cc src/geographic/GeoPolygon.cc src/geographic/Coords.cc src/postgis/entity/Municipio.h tests/postgis_main.cc
 
 
 #	OUTPUT

@@ -5,6 +5,7 @@
 #include "postgis.h"
 #include "../geographic/GeoPolygon.h"
 #include "../geographic/GeoPoint.h"
+#include "entity/Municipio.h"
 
 using namespace std;
 using namespace pqxx;
@@ -16,7 +17,7 @@ using namespace pqxx;
     class PostgisFunctions{
         public:
             static GeoPolygon getBounds(GeoPoint, GeoPoint);
-            static std::vector<GeoPolygon> getPolygonsContained(GeoPolygon);
+            static std::vector<Municipio> getMunicipiosContained(GeoPolygon);
             static std::string getTableSrid(std::string, std::string);
     };
 #endif

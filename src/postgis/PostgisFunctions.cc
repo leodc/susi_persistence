@@ -7,12 +7,12 @@
 * @bounds -> esquinas de la escena satelital
 * 
 * @return
-*   Objeto Vector con todos los GeoPolygon de ciudades que se contienen en la escena.
+*   Objeto Vector con todos los objetos Municipios contenidos en la escena satelital.
 * 
 */
-std::vector<GeoPolygon> PostgisFunctions::getPolygonsContained(GeoPolygon bounds){
+std::vector<Municipio> PostgisFunctions::getMunicipiosContained(GeoPolygon bounds){
     
-    std::vector<GeoPolygon> results;
+    std::vector<Municipio> results;
     
     try{
         
@@ -32,7 +32,7 @@ std::vector<GeoPolygon> PostgisFunctions::getPolygonsContained(GeoPolygon bounds
             sql.append(")");
             
             //cierre
-            sql.append(",geom))) FROM municipios ");
+            sql.append(",geom))),cve_ent,cve_mun,nom_loc FROM municipios ");
             
             //condicion
             sql.append("WHERE NOT ST_isEmpty(ST_Intersection(");
@@ -57,7 +57,13 @@ std::vector<GeoPolygon> PostgisFunctions::getPolygonsContained(GeoPolygon bounds
             for (result::const_iterator c = R.begin(); c != R.end(); ++c) {
                 GeoPolygon polygon(c[0].as<string>(), bounds.getSrid());
                 
-                results.push_back(polygon);
+                Municipio municipio;
+                municipio.setGeometry(polygon);
+                municipio.setEntidad(c[1].as<string>());
+                municipio.setMunicipio(c[2].as<string>());
+                municipio.setLocalidad(c[3].as<string>());
+                
+                results.push_back(municipio);
             }
             
             /*      Reducimos el tamaño del vector      */

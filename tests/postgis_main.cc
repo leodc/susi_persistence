@@ -3,6 +3,7 @@
 #include "../src/postgis/PostgisFunctions.h"
 #include "../src/geographic/GeoPolygon.h"
 #include "../src/geographic/GeoPoint.h"
+#include "../src/postgis/entity/Municipio.h"
 
 int main(int argc, char **argv){
    //Area cercana a la CDMX
@@ -24,13 +25,15 @@ int main(int argc, char **argv){
    */
    std::cout << "PostgisFunctions::getPolygonsContained(bounds) = " << std::endl;
    
-   std::vector<GeoPolygon> results = PostgisFunctions::getPolygonsContained(bounds);
+   std::vector<Municipio> results = PostgisFunctions::getMunicipiosContained(bounds);
    
-   GeoPolygon polygon;
+   Municipio municipio;
    while( !results.empty() ){
-      polygon = results.back();
-      std::cout << polygon.getText() << std::endl;
-      
+      municipio = results.back();
+      std::cout << "Entidad: " << municipio.getEntidad() << "     ";
+      std::cout << "Municipio: " << municipio.getMunicipio() << "    ";
+      std::cout << "Localidad: " << municipio.getLocalidad() << "    ";
+      std::cout << "Geometria: " << municipio.getGeometry().getText() << std::endl;
       
       results.pop_back();
    }

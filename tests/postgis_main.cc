@@ -21,7 +21,7 @@ int main(int argc, char **argv){
    
    
    /*
-   *  GETPOLYGONSCONTAINED
+   *  GETMUNICIPIOSCONTAINED
    */
    std::cout << "PostgisFunctions::getPolygonsContained(bounds) = " << std::endl;
    

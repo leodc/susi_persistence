@@ -15,10 +15,10 @@ OBJS_POSTGIS=src/postgis/postgis.h src/postgis/PostgisFunctions.cc src/geographi
 OUT_FILE=-o ./tests/out
 
 
-geographic: $(OBJS_GEPGRAPHIC)
-	$(CC) $(OBJS_GEPGRAPHIC) $(OUT_FILE)
+#	COMMENT
+COMMENT=Run with ./tests/out
 
-
-postgis: $(OBJS_POSTGIS)
+all: $(OBJS_POSTGIS)
 	$(CC) $(OBJS_POSTGIS) $(OUT_FILE) $(POSTGIS_LIBRARY)
-
+	@echo $()
+	@echo $(COMMENT)

@@ -7,6 +7,12 @@ int main(int argc, char** argv){
     Coords left_bottom(1,-1);
     Coords right_top(1,-1);
     
-    BoundingBox box(left_top, right_top, right_bottom, left_bottom);
+    BoundingBox box();
     box.print();
+}
+
+
+
+std::vector<Municipio> getMunicipios(left_top, right_top, right_bottom, left_bottom){
+    
 }

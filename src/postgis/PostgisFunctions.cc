@@ -1,17 +1,13 @@
 #include "PostgisFunctions.h"
 
 
-
-/*
-* 
-* @bounds -> esquinas de la escena satelital
-* 
-* @return
-*   Objeto Vector con todos los objetos Municipios contenidos en la escena satelital.
-* 
-*/
+/**
+ * @bounds -> esquinas de la escena satelital
+ * 
+ * @return
+ *  Objeto Vector con todos los objetos Municipios contenidos en la escena satelital.
+ * */
 std::vector<Municipio> PostgisFunctions::getMunicipiosContained(GeoPolygon bounds){
-    
     std::vector<Municipio> results;
     
     try{
@@ -22,7 +18,7 @@ std::vector<Municipio> PostgisFunctions::getMunicipiosContained(GeoPolygon bound
         if (C.is_open()) {
             
             /*    Creamos consulta  */
-            std::string sql = "SELECT ST_AsText(ST_Envelope(ST_Intersection(";
+            std::string sql = "SELECT ST_Envelope(ST_Intersection(";
             
             //bounds
             sql.append("ST_GeomFromText('");
@@ -32,7 +28,7 @@ std::vector<Municipio> PostgisFunctions::getMunicipiosContained(GeoPolygon bound
             sql.append(")");
             
             //cierre
-            sql.append(",geom))),cve_ent,cve_mun,nom_loc FROM municipios ");
+            sql.append(",geom)),cve_ent,cve_mun,nom_loc FROM municipios ");
             
             //condicion
             sql.append("WHERE NOT ST_isEmpty(ST_Intersection(");
@@ -85,17 +81,14 @@ std::vector<Municipio> PostgisFunctions::getMunicipiosContained(GeoPolygon bound
 
 
 
-/*
-* 
-* @table_name -> nombre de la tabla.
-* @geometry_column -> nombre de la columna geografica.
-* 
-* @return
-*   Regresa el srid de la tabla especificada
-* 
-* 
-*/
-std::string PostgisFunctions::getTableSrid(std::string table_name, std::string geometry_column = "geom"){
+/**
+ * @table_name -> nombre de la tabla.
+ * @geometry_column -> nombre de la columna geografica.
+ * 
+ * @return
+ *  Regresa el srid de la tabla especificada
+ * */
+std::string PostgisFunctions::getTableSrid(std::string table_name, std::string geometry_column){
     std::string srid;
     try{
         
@@ -153,14 +146,12 @@ std::string PostgisFunctions::getTableSrid(std::string table_name, std::string g
 
 
 /*
-* 
 * @p1 -> esquina superior izquierda
 * @p2 -> esquina inferior derecha
 * 
 * @return
 *   Regresa un GeoPolygon que contiene a los dos puntos.
 *   Si el SRID del objeto es -1 significa que hubo un error.
-* 
 */
 GeoPolygon PostgisFunctions::getBounds(GeoPoint p1, GeoPoint p2){
     GeoPolygon g_polygon;
@@ -216,4 +207,85 @@ GeoPolygon PostgisFunctions::getBounds(GeoPoint p1, GeoPoint p2){
     }
     
     return g_polygon;
+}
+
+
+/**
+ * Persistencia de la información del municipio
+ * */
+bool PostgisFunctions::insertMunicipio(Municipio municipio){
+    
+    try{
+        /* Creamos la conexión  */
+        connection C( POSTGIS_QUERY_CONNECTION );
+        
+        if( !C.is_open() ){
+            return false;
+        }
+        
+        std::string sql = "INSERT INTO transition(data,the_geom) VALUES ('";
+        sql.append("{");
+        
+        sql.append( propertyToString("entidad", municipio.getEntidad()));
+        sql.append( propertyToString("municipio", municipio.getMunicipio()));
+        sql.append( propertyToString("localidad", municipio.getLocalidad()));
+        
+        sql.append( propertyToString("calidad", municipio.getCalidad()));
+        sql.append( propertyToString("nubosidad", municipio.getNubosidad()));
+        sql.append( propertyToString("vegetacion", municipio.getPorcentajeVegetacion()));
+        sql.append( propertyToString("contaminacion", municipio.getPorcentajeContaminacion()));
+        
+        sql.append( propertyToString("scene_id", municipio.getId()));
+        sql.append( propertyToString("scene_time", municipio.getDate(), true));
+        
+        sql.append("}");
+        sql.append("','");
+        sql.append(municipio.getGeometry().getText());
+        sql.append("')");
+        
+        /* Create a transactional object. */
+        work W(C);
+        
+        /* Execute SQL query */
+        W.exec( sql );
+        W.commit();
+        C.disconnect ();
+        
+        return true;
+    }catch (const std::exception &e){
+        cerr << e.what() << std::endl;
+        return false;
+    }
+}
+
+
+std::string propertyToString(std::string key, std::string value, bool last){
+    std::string aux = "\"";
+    aux.append(key);
+    aux.append("\": ");
+    aux.append("\"");
+    aux.append(value);
+    aux.append("\"");
+    
+    if(!last){
+        aux.append(",");
+    }
+    
+    return aux;
+}
+
+
+std::string propertyToString(std::string key, float value, bool last){
+    std::string value_aux = to_string(value);
+    
+    std::string aux = "\"";
+    aux.append(key);
+    aux.append("\": ");
+    aux.append(value_aux);
+    
+    if(!last){
+        aux.append(",");
+    }
+    
+    return aux;
 }

@@ -236,7 +236,8 @@ bool PostgisFunctions::insertMunicipio(Municipio municipio){
         sql.append( propertyToString("contaminacion", municipio.getPorcentajeContaminacion()));
         
         sql.append( propertyToString("scene_id", municipio.getId()));
-        sql.append( propertyToString("scene_time", municipio.getDate(), true));
+        sql.append( propertyToString("scene_date_temp", municipio.getDateAcquired()));
+        sql.append( propertyToString("scene_time", municipio.getSceneCenterTime(), true));
         
         sql.append("}");
         sql.append("','");

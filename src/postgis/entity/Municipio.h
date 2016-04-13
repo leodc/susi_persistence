@@ -11,7 +11,8 @@
         GeoPolygon geometry;
         
         std::string id;
-        long date; //epoch time
+        std::string dateAcquired;
+        std::string sceneCenterTime;
         
         /**
          * properties
@@ -29,8 +30,11 @@
             void setId(std::string id){
                 this->id = id;
             }
-            void setDate(long date){
-                this->date = date;
+            void setDateAcquired(std::string dateAcquired){
+                this->dateAcquired = dateAcquired;
+            }
+            void setSceneCenterTime(std::string sceneCenterTime){
+                this->sceneCenterTime = sceneCenterTime;
             }
             void setPorcentajeContaminacion(float porcentajeContaminacion){
                 this->porcentajeContaminacion = porcentajeContaminacion;
@@ -84,8 +88,11 @@
             std::string getId(){
                 return id;
             }
-            long getDate(){
-                return date;
+            std::string getDateAcquired(){
+                return dateAcquired;
+            }
+            std::string getSceneCenterTime(){
+                return sceneCenterTime;
             }
     };
     

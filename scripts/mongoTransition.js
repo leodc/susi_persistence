@@ -66,8 +66,11 @@ client.connect(function(err) {
             geojson.the_geom = JSON.parse(result.rows[i].the_geom);
             
             //epoch time
-            var dateString = result.rows[i].data.scene_date_temp + "T" + result.rows[i].data.scene_time;
+            var dateString = geojson.scene_date_temp + "T" + geojson.scene_time;
             geojson.scene_date = new Date(dateString).getTime();
+            
+            delete geojson.scene_date_temp;
+            delete geojson.scene_time;
             
             data.push(geojson);
         }
